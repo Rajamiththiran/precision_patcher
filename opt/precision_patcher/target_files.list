@@ -1,0 +1,30 @@
+# =============================================================================
+# target_files.list — Files to be patched by Precision Patcher
+# =============================================================================
+# Rules:
+#   - One file path per line (absolute or relative to this script's directory)
+#   - Lines starting with # are comments and will be skipped
+#   - Empty lines are also skipped
+#   - The script will ONLY touch files listed here — never wildcards
+# =============================================================================
+
+# --- PHP application files ---
+/var/www/html/app/config/database.php
+/var/www/html/app/config/app.php
+/var/www/html/app/Http/Middleware/Authenticate.php
+
+# --- Python service files ---
+/opt/services/api_gateway/settings.py
+/opt/services/worker/config.py
+
+# --- Config / environment files ---
+/etc/myapp/production.conf
+/var/www/html/.env
+
+# --- Nginx / server config ---
+# /etc/nginx/sites-available/myapp.conf   ← uncomment to include
+
+# =============================================================================
+# NOTE: If a file doesn't exist or isn't writable, the patcher will log
+# a [FAILED] entry and continue to the next file without stopping.
+# =============================================================================

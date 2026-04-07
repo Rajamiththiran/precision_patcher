@@ -1,0 +1,26 @@
+# =============================================================================
+# payload.txt — Multi-line Code Injection Payload
+# =============================================================================
+# This file is used when ACTION=insert_before or ACTION=insert_after.
+# The ENTIRE content of this file will be injected at the anchor point.
+#
+# REPLACE_WITH in patcher.conf is ignored when this file is active.
+#
+# TIP: No escaping needed — quotes, semicolons, $vars, and special
+#      characters are all safe here.
+# =============================================================================
+
+// --- Injected by Precision Patcher ---
+// Security & rate-limit check (auto-applied on: 2025-01-15)
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    error_log("[SECURITY] Unauthenticated access attempt from: " . $_SERVER['REMOTE_ADDR']);
+    http_response_code(403);
+    exit("Access denied.");
+}
+
+if (isset($_SESSION['last_request']) && (time() - $_SESSION['last_request']) < 1) {
+    http_response_code(429);
+    exit("Too many requests.");
+}
+$_SESSION['last_request'] = time();
+// --- End of injected block ---
